@@ -37,9 +37,9 @@ def score(dice)
     totals[value-1]+=1
   end
   if totals[0] == 6
-    score += 2000
+    final_score += 2000
   elsif totals[0] >= 3
-    score+=1000
+    final_score+=1000
     totals[0]-=3
     final_score+=totals[0]*100
   else
@@ -48,12 +48,15 @@ def score(dice)
   totals[0] = 0
   totals.each_with_index do | total, i |
     if i == 4
-      final_score+=(total/3)*500+(total%5)*50
+      final_score+=(total/3)*500+(total%3)*50
     else
       final_score+=(total/3)*(i+1)*100
     end
+  end
   return final_score
 end
+
+score([1,1,1])
 
 class AboutScoringProject < Neo::Koan
   def test_score_of_an_empty_list_is_zero
